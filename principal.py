@@ -1,32 +1,37 @@
-agenda = []
-while True:
+from funcoes import incluir
+
+def menu ():
     print("1 - Cadastro")
     print("2 - Pesquisa pelo nome")
     print('3 - Listar')
     print('4 - Alterar')
     print('5 - Excluir')
     print('9 - Sair')
+
+agenda = []
+while True :
+    menu()
     opcao = int( input('Informe a opção: '))
 
     if opcao == 1: 
-        pessoa = {}
-        pessoa['nome'] = input("Informe nome: ")
-        pessoa['email'] = input('Informe o e-mail: ')
-        pessoa['telefone'] = input('Informe o telefone: ')
-
-        agenda.append(pessoa)
+        incluir(agenda)
     elif opcao == 2:
         nomeBusca = input('Informe o nome para busca: ')
-        for elemento in agenda:
-            if elemento['nome'].lower() == nomeBusca.lower():
-                print(f"""{elemento['nome']}\t
-                  {elemento['email']}
-                  \t{elemento['telefone']}""")
+        indice = pesquisar(agenda, nomeBusca)
+
+        if indice !=-1:
+            print (f"""{agenda[indice]['nome']}
+                 - {agenda[indice]['email']} -
+                   {agenda[indice]['Telefone']}""")
+        else:
+            print('Contato não encontrado')    
+        
     elif opcao == 3:
         for elemento in agenda:
             print(f"""{elemento['nome']}\t
                   {elemento['email']}
                   \t{elemento['telefone']}""")
+            
     elif opcao == 4:
         nomeBusca = input('Informe o nome para busca: ')    
         posicao = -1
@@ -39,6 +44,7 @@ while True:
             agenda[posicao]['nome'] = input("Informe o nome: ")
             agenda[posicao]['email'] = input("Informe o e-mail: ")
             agenda[posicao]['telefone'] = input("Informe o telefone: ")
+            
     elif opcao == 5:
         nomeBusca = input('Informe o nome para busca: ')    
         posicao = -1
